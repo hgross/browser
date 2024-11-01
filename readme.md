@@ -14,6 +14,7 @@ The block provides an API for dynamic configuration, and also exposes the Chromi
 - Automatically displays local HTTP (port 80 or 8080) or HTTPS (443) service endpoints.
 - API for remote configuration and management
 - Chromium remote debugging port
+- Remotely enable/disable display
 ---
 
 ## Usage
@@ -220,6 +221,24 @@ Returns the version of Chromium that `browser` is running
 #### **GET** /screenshot
 Uses [scrot](https://opensource.com/article/17/11/taking-screen-captures-linux-command-line-scrot) to take a screenshot of the chromium window. 
 The screenshot will be saved as a temporary file in the container.
+
+
+#### **GET** /display
+Returns `on` or `off` depending on the display status
+
+#### **PUT** or **POST** /display
+Expects json payload with `state` key. 
+
+Turn display on:
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{"state": "on"}' http://localhost:5011/display
+```
+
+Turn display off:
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{"state": "off"}' http://localhost:5011/display
+```
+
 
 ---
 
